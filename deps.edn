@@ -1,0 +1,32 @@
+{
+ :mvn/repos {"jitpack" {:url "https://jitpack.io"}}
+
+ :paths ["src" "resources"]
+
+ :deps {org.clojure/clojure {:mvn/version "1.10.1"}
+        local/java-tree-sitter {:local/root "./resources/java/java-tree-sitter-1.1.1.jar"}}
+
+
+    ;; com.github.serenadeai/java-tree-sitter {:mvn/version "1.1.2"}}
+
+ :aliases
+ {
+
+  :native {:jvm-opts  ["-Djava.library.path=./resources/native"]}
+  :cider {:jvm-opts  ["-Djava.library.path=./resources/native"]}
+  ;; :debug {:jvm-opts ["-Xcheck:jni"]}
+
+  :cider-clj
+  {:extra-deps {org.clojure/clojure {:mvn/version "1.10.1"}
+                cider/cider-nrepl {:mvn/version "0.28.1"}}
+   :jvm-opts  ["-Djava.library.path=./resources/native"]
+   :main-opts ["-m" "nrepl.cmdline" "-i" "--middleware" "[cider.nrepl/cider-middleware]"]}
+  
+  :cider-cljs
+  {:extra-deps {org.clojure/clojure {:mvn/version "1.10.1"}
+                org.clojure/clojurescript {:mvn/version "1.10.339"}
+                cider/cider-nrepl {:mvn/version "0.28.1"}
+                cider/piggieback {:mvn/version "0.5.2"}}
+   :jvm-opts  ["-Djava.library.path=./resources/native"]
+   :main-opts ["-m" "nrepl.cmdline" "--middleware"
+               "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}}}
